@@ -1,0 +1,17 @@
+.form-sec{
+    width: 20%;
+    margin: 250px auto 0 auto;
+    background: antiquewhite;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+.form-sec input{
+    margin-bottom: 20px;
+    padding: 5px 15px;
+    outline: none;
+}
+button{
+    padding: 5px 15px;
+    border-radius: 5px;
+}
