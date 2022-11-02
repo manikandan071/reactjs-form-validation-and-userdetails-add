@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { stateCondex } from '../context/contex';
 const Home = () => {
+  const {state,dispatch}= useContext(stateCondex);
+  console.log(state);
   const navigate= useNavigate();
   function cartPage(){
     navigate('/Cart')
@@ -14,6 +16,15 @@ const Home = () => {
       <div>
         <button onClick={()=>cartPage()}>Add</button>
       </div>
+        {state.task?.map((iteam,index)=>{
+          return(
+            <div>
+            <h3 key={index}>{iteam.userInput}</h3>
+            <p key={index}>{iteam.usermsg}</p>
+            </div>
+            )
+          
+        })}
     </div>
   )
 }

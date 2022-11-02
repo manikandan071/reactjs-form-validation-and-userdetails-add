@@ -1,0 +1,20 @@
+.user-input{
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+.user-input input{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px 0 ;
+    outline: none;
+}
+.user-input textarea{
+    width: 100%;
+    padding: 20px 0;
+    outline: none;
+    margin-bottom: 20px;
+}
+.user-input button{
+    padding: 5px 20px;
+}
