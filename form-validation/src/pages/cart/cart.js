@@ -1,21 +1,30 @@
 import React, { useContext, useState } from 'react'
 import './cart.css'
 import { stateCondex } from '../context/contex';
+import { Link, useSearchParams } from 'react-router-dom';
 
 
 const Cart = () => {
+    const [params]= useSearchParams();
+    let id=params.get('id');
+    console.log(id);
+
     const {state , dispatch}=useContext(stateCondex);
     console.log(state.task);
     const [userInput ,setInput]=useState('');
     const [usermsg , setuserMsg] = useState('');
+    const [userDate , setuserDate] =useState('');
     // const [task,setTask]=useState([]);
     // console.log(task);
     const userData=(value)=>{
         if(value.target.name === 'userdata'){
             setInput(value.target.value);
     }
-    else{
+    else if(value.target.name === 'description'){
         setuserMsg(value.target.value);
+    }
+    else{
+        setuserDate(value.target.value)
     }
 }
 // let display=document.getElementById('display');
@@ -29,27 +38,37 @@ const Cart = () => {
 //         display.append(pera);
 //     });
 // }
+
+
 const userSubmit=(value)=>{
     value.preventDefault();
-    console.log(userInput,usermsg);
+    console.log(userInput,usermsg,userDate);
     // setTask([...task,{'userinput':userInput,'usermsg':usermsg}]);
     const data={
-        userInput,
-        usermsg,
+        id:state.task.length+1,
+        usertitle:userInput,
+        userdescription:usermsg,
+        userbirthday:userDate,
+        defaultValue: false,
     };
+    setInput("");
+    setuserMsg("");
+    setuserDate("")
     dispatch({type:"add_task", payload : [...state.task , data]});
+   
     // showing(arr);
 }
 // console.log(arr);
   return (
     <div>
         <div>
-            <h4>Logo</h4>
+            <Link to='/Home'>Home</Link>
         </div>
         <div className='user-input'>
             <form>
-                <input placeholder='Description' name='userdata' onChange={userData}/>
-                <textarea name='description' onChange={userData}/>
+                <input autoComplete='off' placeholder='Description' value={userInput} name='userdata' onChange={userData}/>
+                <textarea name='description' value={usermsg} onChange={userData}/>
+                <input type='date' name='date' value={userDate} onChange={userData}/>
                 <button onClick={(value)=>userSubmit(value)}>Add</button>
             </form>
         </div>
