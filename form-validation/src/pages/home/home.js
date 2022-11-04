@@ -40,7 +40,7 @@ const Home = () => {
       <div className='input-show'>
       {state.task?.map((iteam,index)=>{
           return(
-            <div>
+            <div key={index}>
             <h3>{iteam.usertitle}</h3>
             <h4>{iteam.userbirthday}</h4>
             <p>{iteam.userdescription}</p>

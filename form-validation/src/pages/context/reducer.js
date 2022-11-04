@@ -32,6 +32,12 @@ export const stateReducer= (state , action)=>{
                     return item;
                 })
             }
+        case 'update_task':
+            console.log(action.payload);
+            return{
+                ...state,
+                task: [...state.task.filter((item)=>item.id !== action.payload.id),action.payload]
+            }
         default:
             return state
     }

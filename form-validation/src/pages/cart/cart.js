@@ -1,19 +1,23 @@
 import React, { useContext, useState } from 'react'
 import './cart.css'
 import { stateCondex } from '../context/contex';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 
 const Cart = () => {
+    const navigate = useNavigate();
     const [params]= useSearchParams();
-    let id=params.get('id');
+    let id=parseInt(params.get('id'));
     console.log(id);
+    
 
     const {state , dispatch}=useContext(stateCondex);
     console.log(state.task);
-    const [userInput ,setInput]=useState('');
-    const [usermsg , setuserMsg] = useState('');
-    const [userDate , setuserDate] =useState('');
+    let getid= state.task.findIndex(item=>item.id === id);
+    console.log(getid);
+    const [userInput ,setInput]=useState(state.task[getid]?.usertitle || "");
+    const [usermsg , setuserMsg] = useState(state.task[getid]?.userdescription || "");
+    const [userDate , setuserDate] =useState(state.task[getid]?.userbirthday || "");
     // const [task,setTask]=useState([]);
     // console.log(task);
     const userData=(value)=>{
@@ -44,18 +48,33 @@ const userSubmit=(value)=>{
     value.preventDefault();
     console.log(userInput,usermsg,userDate);
     // setTask([...task,{'userinput':userInput,'usermsg':usermsg}]);
-    const data={
-        id:state.task.length+1,
-        usertitle:userInput,
-        userdescription:usermsg,
-        userbirthday:userDate,
-        defaultValue: false,
-    };
-    setInput("");
-    setuserMsg("");
-    setuserDate("")
-    dispatch({type:"add_task", payload : [...state.task , data]});
-   
+    if(id){
+        const data={
+            id:parseInt(id),
+            usertitle:userInput,
+            userdescription:usermsg,
+            userbirthday:userDate,
+        };
+        setInput("");
+        setuserMsg("");
+        setuserDate("");
+        dispatch({type:"update_task", payload : data});
+        navigate('/Home')
+    }
+    else{
+        const data={
+            id:state.task.length+1,
+            usertitle:userInput,
+            userdescription:usermsg,
+            userbirthday:userDate,
+            defaultValue: false,
+        };
+        setInput("");
+        setuserMsg("");
+        setuserDate("");
+    
+        dispatch({type:"add_task", payload : [...state.task , data]});
+    }
     // showing(arr);
 }
 // console.log(arr);
