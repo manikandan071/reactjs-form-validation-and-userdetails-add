@@ -38,6 +38,16 @@ export const stateReducer= (state , action)=>{
                 ...state,
                 task: [...state.task.filter((item)=>item.id !== action.payload.id),action.payload]
             }
+        case 'sort_ascend':
+            return{
+                ...state,
+                task:action.payload
+            }
+            case 'sort_descend':
+                return{
+                    ...state,
+                    task:action.payload
+                }
         default:
             return state
     }

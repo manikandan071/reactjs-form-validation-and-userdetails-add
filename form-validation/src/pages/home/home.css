@@ -6,8 +6,14 @@
     margin: 10px auto 10px auto;
 }
 .input-show{
-    width: 80%;
-    margin: 0 auto;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.input-show .card-sec{
+    width: 29%;
+    margin: 2%;
 }
 .header{
     border-bottom: 1px solid rgba(124, 117, 211, 0.699);

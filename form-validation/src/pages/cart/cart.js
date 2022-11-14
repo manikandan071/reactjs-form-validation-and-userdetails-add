@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 import './cart.css'
 import { stateCondex } from '../context/contex';
+import { TextField } from '@material-ui/core';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 
 const Cart = () => {
@@ -9,6 +11,7 @@ const Cart = () => {
     const [params]= useSearchParams();
     let id=parseInt(params.get('id'));
     console.log(id);
+    
     
 
     const {state , dispatch}=useContext(stateCondex);
@@ -54,6 +57,7 @@ const userSubmit=(value)=>{
             usertitle:userInput,
             userdescription:usermsg,
             userbirthday:userDate,
+            defaultValue: false,
         };
         setInput("");
         setuserMsg("");
@@ -79,16 +83,16 @@ const userSubmit=(value)=>{
 }
 // console.log(arr);
   return (
-    <div>
+    <div className='cart-sec'>
         <div>
             <Link to='/Home'>Home</Link>
         </div>
         <div className='user-input'>
             <form>
-                <input autoComplete='off' placeholder='Description' value={userInput} name='userdata' onChange={userData}/>
-                <textarea name='description' value={usermsg} onChange={userData}/>
-                <input type='date' name='date' value={userDate} onChange={userData}/>
-                <button onClick={(value)=>userSubmit(value)}>Add</button>
+                <TextField className='input-sec' autoComplete='off' placeholder='Title' value={userInput} name='userdata' onChange={userData}/>
+                <TextField className='input-sec' id="standard-textarea" multiline name='description' placeholder='Description' value={usermsg} onChange={userData}/>
+                <TextField className='input-sec' id='date' type='date' name='date' value={userDate} onChange={userData}/>
+                <Button variant="contained" color="primary" onClick={(value)=>userSubmit(value)}>Add</Button>
             </form>
         </div>
         

@@ -1,7 +1,15 @@
 .user-input{
     width: 20%;
-    margin: 0 auto;
+    margin: 200px auto 0 auto;
     text-align: center;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+.cart-sec{
+    background-color: aqua;
+    height: 800px;
 }
 .user-input input{
     width: 100%;
@@ -17,4 +25,9 @@
 }
 .user-input button{
     padding: 5px 20px;
+    margin-top: 30px;
+}
+.user-input .input-sec{
+    width: 100%;
+    margin-top: 10px;
 }
