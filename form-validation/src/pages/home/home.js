@@ -27,6 +27,11 @@ const Home = () => {
     console.log(sort);
     dispatch({type:"sort_descend" , payload: sort})
   }
+  function filterSelected(){
+    const selected=state.task.filter((item)=> item.selected === true);
+    console.log(selected);
+    dispatch({type:"filter_selected" , payload:selected})
+  }
   const defaultValueChange=(id)=>{
     dispatch({type:'default_change', payload: id})
   }
@@ -54,6 +59,7 @@ const Home = () => {
           <Button variant="contained" color="primary" onClick={()=>cartPage()} >Add</Button>
           <Button variant="contained" color="primary" onClick={()=>filterContentAsd()} >Ascend</Button>
           <Button variant="contained" color="primary" onClick={()=>filterContentDsd()} >Descend</Button>
+          <Button variant="contained" color="primary" onClick={()=>filterSelected()} >fillter</Button>
         </div> 
       </div>
       </div>
@@ -78,6 +84,7 @@ const Home = () => {
                 <Button onClick={()=>deleteItems(iteam.id)}>Delete</Button>
                 <Button onClick={()=>editIteams(iteam.id)}>Edit</Button>
                 <input type='checkbox' checked={iteam.defaultValue} onChange={()=>defaultValueChange(iteam.id)}/>
+                <input disabled type='checkbox' checked={iteam.selected}/>
               </CardActions>
             </Card>
 

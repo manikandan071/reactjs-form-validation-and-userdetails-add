@@ -43,11 +43,16 @@ export const stateReducer= (state , action)=>{
                 ...state,
                 task:action.payload
             }
-            case 'sort_descend':
-                return{
+        case 'sort_descend':
+            return{
+                ...state,
+                task:action.payload
+            }
+        case 'filter_selected':
+            return{
                     ...state,
                     task:action.payload
-                }
+            }
         default:
             return state
     }

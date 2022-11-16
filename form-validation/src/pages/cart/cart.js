@@ -3,6 +3,8 @@ import './cart.css'
 import { stateCondex } from '../context/contex';
 import { TextField } from '@material-ui/core';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
 
@@ -21,6 +23,7 @@ const Cart = () => {
     const [userInput ,setInput]=useState(state.task[getid]?.usertitle || "");
     const [usermsg , setuserMsg] = useState(state.task[getid]?.userdescription || "");
     const [userDate , setuserDate] =useState(state.task[getid]?.userbirthday || "");
+    const [select , setSelect] = useState(state.task[getid]?.selected || false)
     // const [task,setTask]=useState([]);
     // console.log(task);
     const userData=(value)=>{
@@ -46,6 +49,11 @@ const Cart = () => {
 //     });
 // }
 
+const userSelect=()=>{
+    return(
+        setSelect(!select)
+    )
+}
 
 const userSubmit=(value)=>{
     value.preventDefault();
@@ -58,6 +66,7 @@ const userSubmit=(value)=>{
             userdescription:usermsg,
             userbirthday:userDate,
             defaultValue: false,
+            selected:select
         };
         setInput("");
         setuserMsg("");
@@ -72,10 +81,12 @@ const userSubmit=(value)=>{
             userdescription:usermsg,
             userbirthday:userDate,
             defaultValue: false,
+            selected:select
         };
         setInput("");
         setuserMsg("");
         setuserDate("");
+        setSelect(false)
     
         dispatch({type:"add_task", payload : [...state.task , data]});
     }
@@ -92,6 +103,8 @@ const userSubmit=(value)=>{
                 <TextField className='input-sec' autoComplete='off' placeholder='Title' value={userInput} name='userdata' onChange={userData}/>
                 <TextField className='input-sec' id="standard-textarea" multiline name='description' placeholder='Description' value={usermsg} onChange={userData}/>
                 <TextField className='input-sec' id='date' type='date' name='date' value={userDate} onChange={userData}/>
+                {/* <input type='checkbox' placeholder='priority' checked={select} onChange={()=>userSelect()}/> */}
+                <FormControlLabel control={<Checkbox checked={select} onChange={()=>userSelect()}  name="checkedA" />}label="priority"/>
                 <Button variant="contained" color="primary" onClick={(value)=>userSubmit(value)}>Add</Button>
             </form>
         </div>
